@@ -22,10 +22,13 @@ model team {
 
 // eletricista
 model electrician {
-  id     Int    @id @default(autoincrement())
-  name   String @db.VarChar(150)
-  teamId Int
-  team   team   @relation(fields: [teamId], references: [id])
+  id        Int         @id @default(autoincrement())
+  name      String      @db.VarChar(150)
+  teamId    Int
+  team      team        @relation(fields: [teamId], references: [id])
+  equipment equipment[]
+  originTransfers      transfer[] @relation("originElectrician")
+  destinationTransfers transfer[] @relation("destinationElectrician")
 }
 
 // marca
@@ -37,27 +40,74 @@ model brand {
 
 // centro logistico
 model logisticsCenter {
-  id          Int    @id @default(autoincrement())
-  city        String @db.VarChar(255)
-  responsible String @db.VarChar(150)
+  id          Int         @id @default(autoincrement())
+  city        String      @db.VarChar(255)
+  responsible String      @db.VarChar(150)
   users       user[]
+  equipment   equipment[]
+  originTransfers      transfer[] @relation("originCenter")
+  destinationTransfers transfer[] @relation("destinationCenter")
 }
 
 //usuario
 model user {
-  id       Int             @id @default(autoincrement())
-  name     String          @unique @db.VarChar(100)
-  password String          @db.VarChar(255)
-  centerId Int
-  center   logisticsCenter @relation(fields: [centerId], references: [id])
+  id        Int             @id @default(autoincrement())
+  name      String          @unique @db.VarChar(100)
+  password  String          @db.VarChar(255)
+  centerId  Int
+  center    logisticsCenter @relation(fields: [centerId], references: [id])
+  transfers transfer[]
 }
 
+// material
 model material {
-  id          Int    @id @default(autoincrement())
-  cod         String @unique @db.VarChar(50)
-  description String @db.VarChar(150)
-  color       String? @db.VarChar(50)
-  eorder      String? @db.VarChar(50)
+  id          Int         @id @default(autoincrement())
+  cod         String      @unique @db.VarChar(50)
+  description String      @db.VarChar(150)
+  color       String?     @db.VarChar(50)
+  eorder      String?     @db.VarChar(50)
   brandId     Int
-  brand       brand  @relation(fields: [brandId], references: [id])
+  brand       brand       @relation(fields: [brandId], references: [id])
+  equipment   equipment[]
+}
+
+// equipamento
+model equipment {
+  id            Int              @id @default(autoincrement())
+  nc            String           @unique @db.VarChar(150)
+  status        String           @default("EM_ESTOQUE") @db.VarChar(20)
+  installation  DateTime?
+  remark        String?          @db.VarChar(255)
+  registration  DateTime         @default(now())
+  materialId    Int
+  material      material         @relation(fields: [materialId], references: [id])
+  centerId      Int?
+  center        logisticsCenter? @relation(fields: [centerId], references: [id])
+  electricianId Int?
+  electrician   electrician?     @relation(fields: [electricianId], references: [id])
+  transfers     transfer[]
+}
+
+model transfer {
+  id       Int      @id @default(autoincrement())
+  movement DateTime @default(now())
+  remark   String?  @db.VarChar(255)
+
+  equipmentId Int
+  equipment   equipment @relation(fields: [equipmentId], references: [id])
+
+  originCenterId Int?
+  originCenter   logisticsCenter? @relation("originCenter", fields: [originCenterId], references: [id])
+
+  originElectricianId Int?
+  originElectrician   electrician? @relation("originElectrician", fields: [originElectricianId], references: [id])
+
+  destinationCenterId Int?
+  destinationCenter   logisticsCenter? @relation("destinationCenter", fields: [destinationCenterId], references: [id])
+
+  destinationElectricianId Int?
+  destinationElectrician   electrician? @relation("destinationElectrician", fields: [destinationElectricianId], references: [id])
+
+  userId Int
+  user   user @relation(fields: [userId], references: [id])
 }
