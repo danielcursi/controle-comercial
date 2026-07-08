@@ -12,3 +12,52 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// equipe
+model team {
+  id           Int           @id @default(autoincrement())
+  name         String        @unique @db.VarChar(100)
+  electricians electrician[]
+}
+
+// eletricista
+model electrician {
+  id     Int    @id @default(autoincrement())
+  name   String @db.VarChar(150)
+  teamId Int
+  team   team   @relation(fields: [teamId], references: [id])
+}
+
+// marca
+model brand {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique @db.VarChar(100)
+  materials material[]
+}
+
+// centro logistico
+model logisticsCenter {
+  id          Int    @id @default(autoincrement())
+  city        String @db.VarChar(255)
+  responsible String @db.VarChar(150)
+  users       user[]
+}
+
+//usuario
+model user {
+  id       Int             @id @default(autoincrement())
+  name     String          @unique @db.VarChar(100)
+  password String          @db.VarChar(255)
+  centerId Int
+  center   logisticsCenter @relation(fields: [centerId], references: [id])
+}
+
+model material {
+  id          Int    @id @default(autoincrement())
+  cod         String @unique @db.VarChar(50)
+  description String @db.VarChar(150)
+  color       String? @db.VarChar(50)
+  eorder      String? @db.VarChar(50)
+  brandId     Int
+  brand       brand  @relation(fields: [brandId], references: [id])
+}
