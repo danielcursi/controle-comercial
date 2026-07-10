@@ -41,7 +41,7 @@ model brand {
 // centro logistico
 model logisticsCenter {
   id          Int         @id @default(autoincrement())
-  city        String      @db.VarChar(255)
+  city        String      @unique @db.VarChar(255)
   responsible String      @db.VarChar(150)
   users       user[]
   equipment   equipment[]
