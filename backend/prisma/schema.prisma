@@ -55,6 +55,7 @@ model user {
   name      String          @unique @db.VarChar(100)
   password  String          @db.VarChar(255)
   active Boolean? @default(true)
+  type String @db.VarChar(50) @default("COMUM")
   centerId  Int
   center    logisticsCenter @relation(fields: [centerId], references: [id])
   transfers transfer[]

@@ -1,0 +1,2 @@
+-- AlterTable
+ALTER TABLE "user" ADD COLUMN     "type" VARCHAR(50) NOT NULL DEFAULT 'COMUM';

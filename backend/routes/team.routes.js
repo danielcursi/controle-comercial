@@ -64,7 +64,7 @@ router.put('/:id', async (req, res) => {
         res.status(200).json(updateTeam)
 
     } catch (error) {
-        res.status(400).json({ error: "Request error!" })
+        res.status(500).json({ error: "Request error!" })
     }
 })
 
@@ -90,7 +90,7 @@ router.delete('/:id', async (req, res) => {
         })
         res.status(200).json(deleteTeam)
     } catch (error){
-        res.status(400).json({ error: "Request error!"})
+        res.status(500).json({ error: "Request error!"})
     }
 })
 
