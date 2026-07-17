@@ -22,31 +22,31 @@ model team {
 
 // eletricista
 model electrician {
-  id        Int         @id @default(autoincrement())
-  name      String      @db.VarChar(150)
-  teamId    Int
-  team      team        @relation(fields: [teamId], references: [id])
-  equipment equipment[]
-  originTransfers      transfer[] @relation("originElectrician")
-  destinationTransfers transfer[] @relation("destinationElectrician")
+  id                   Int         @id @default(autoincrement())
+  name                 String      @db.VarChar(150)
+  teamId               Int
+  team                 team        @relation(fields: [teamId], references: [id])
+  equipment            equipment[]
+  originTransfers      transfer[]  @relation("originElectrician")
+  destinationTransfers transfer[]  @relation("destinationElectrician")
 }
 
 // marca
 model brand {
-  id        Int        @id @default(autoincrement())
-  name      String     @unique @db.VarChar(100)
-  materials material[]
+  id        Int         @id @default(autoincrement())
+  name      String      @unique @db.VarChar(100)
+  equipment equipment[]
 }
 
 // centro logistico
 model logisticsCenter {
-  id          Int         @id @default(autoincrement())
-  city        String      @unique @db.VarChar(255)
-  responsible String      @db.VarChar(150)
-  users       user[]
-  equipment   equipment[]
-  originTransfers      transfer[] @relation("originCenter")
-  destinationTransfers transfer[] @relation("destinationCenter")
+  id                   Int         @id @default(autoincrement())
+  city                 String      @unique @db.VarChar(255)
+  responsible          String      @db.VarChar(150)
+  users                user[]
+  equipment            equipment[]
+  originTransfers      transfer[]  @relation("originCenter")
+  destinationTransfers transfer[]  @relation("destinationCenter")
 }
 
 //usuario
@@ -54,8 +54,8 @@ model user {
   id        Int             @id @default(autoincrement())
   name      String          @unique @db.VarChar(100)
   password  String          @db.VarChar(255)
-  active Boolean? @default(true)
-  type String @db.VarChar(50) @default("COMUM")
+  active    Boolean?        @default(true)
+  type      String          @default("COMUM") @db.VarChar(50)
   centerId  Int
   center    logisticsCenter @relation(fields: [centerId], references: [id])
   transfers transfer[]
@@ -67,9 +67,6 @@ model material {
   cod         String      @unique @db.VarChar(50)
   description String      @db.VarChar(150)
   color       String?     @db.VarChar(50)
-  eorder      String?     @db.VarChar(50)
-  brandId     Int
-  brand       brand       @relation(fields: [brandId], references: [id])
   equipment   equipment[]
 }
 
@@ -81,6 +78,9 @@ model equipment {
   installation  DateTime?
   remark        String?          @db.VarChar(255)
   registration  DateTime         @default(now())
+  eorder        String?          @db.VarChar(50)
+  brandId       Int
+  brand         brand            @relation(fields: [brandId], references: [id])
   materialId    Int
   material      material         @relation(fields: [materialId], references: [id])
   centerId      Int?
