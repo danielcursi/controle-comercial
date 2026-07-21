@@ -36,5 +36,74 @@ router.post('/', async (req, res) => {
     }
 })
 
+router.put('/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+        const { nc, status, installation, remark, eorder, brandId, materialId, centerId, electricianId } = req.body
+
+        const equipment = await prisma.equipment.findUnique({
+            where: {
+                id: Number(id)
+            }
+        })
+
+        if(!equipment){
+            return res.status(404).json({
+                error: "Equipment not found!"
+            })
+        }
+
+        const data = {}
+
+        if (nc !== undefined) data.nc = nc
+        if (status !== undefined) data.status = status
+        if (installation !== undefined) data.installation = new Date(installation)
+        if (remark !== undefined) data.remark = remark
+        if (eorder !== undefined) data.eorder = eorder
+        if (brandId !== undefined) data.brandId = brandId
+        if (materialId !== undefined) data.materialId = materialId
+        if (centerId !== undefined) data.centerId = centerId
+        if (electricianId !== undefined) data.electricianId = electricianId
+
+        const updateEquipment = await prisma.equipment.update({
+            where: {
+                id: Number(id)
+            },
+            data
+        })
+        res.status(204).json(updateEquipment)
+
+    } catch (error){
+        return res.status(500).json({ error: error.message })
+    }
+})
+
+router.delete('/:id', async (req, res) => {
+    try{
+        const { id } = req.params
+
+        const equipment = await prisma.equipment.findUnique({
+            where: {
+                id: Number(id)
+            }
+        })
+
+        if(!equipment){
+            return res.status(404).json({ error: "Equipment not found!" })
+        }
+
+        const deleteEquip = await prisma.equipment.delete({
+            where: {
+                id: Number(id)
+            }
+        })
+        res.status(200).json(deleteEquip)
+        
+    } catch (error){
+        return res.status(500).json({ error: "Request error!" })
+    }
+    
+})
+
 
 export default router
