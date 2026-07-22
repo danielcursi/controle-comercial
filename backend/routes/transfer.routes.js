@@ -34,6 +34,7 @@ router.post('/', async (req, res) => {
             }
         }
 
+        // $transaction serve para fazer varias operações
         const transfer = await prisma.$transaction(async (tx) => {
 
             // Atualiza o responsável atual pelo equipamento
