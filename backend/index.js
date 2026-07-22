@@ -7,6 +7,7 @@ import electricianRouter from './routes/electrician.routes.js'
 import brandRouter from './routes/brand.routes.js'
 import materialRouter from './routes/material.routes.js'
 import equipmentRouter from './routes/equipment.routes.js'
+import transferRouter from './routes/transfer.routes.js'
 
 const app = express()
 
@@ -19,5 +20,6 @@ app.use('/electrician', electricianRouter)
 app.use('/brand', brandRouter)
 app.use('/material', materialRouter)
 app.use('/equipment', equipmentRouter)
+app.use('/transfer', transferRouter)
 
 app.listen(3000, () => console.log('Servidor iniciado!'))
