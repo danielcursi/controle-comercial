@@ -13,11 +13,17 @@
 }
 
 .nav section{
-    padding: 1rem;
+    padding: 1rem .7rem;
 }
 
 .logo{
     border-bottom: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+}
+
+.icon{
+    font-size: 2.4rem;
 }
 
 .logo h4{
@@ -42,7 +48,10 @@
 }
 
 .links a{
-    color: #2e2e2e;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: #3d3d3d;
     cursor: pointer;
     margin: .5rem 0;
     padding: .5rem;
