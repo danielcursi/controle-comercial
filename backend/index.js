@@ -1,4 +1,5 @@
 import express from "express"
+import cors from 'cors'
 
 import teamRouter from './routes/team.routes.js'
 import centerRouter from './routes/centers.routes.js'
@@ -11,6 +12,7 @@ import transferRouter from './routes/transfer.routes.js'
 
 const app = express()
 
+app.use(cors())
 app.use(express.json())
 
 app.use('/team', teamRouter)
