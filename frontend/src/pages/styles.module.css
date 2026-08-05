@@ -9,6 +9,10 @@
     flex-direction: column;
 }
 
+.main section{
+    margin: 1rem 1.5rem;
+}
+
 .footer{
     background-color: #2b2c30;
     color: #fff;

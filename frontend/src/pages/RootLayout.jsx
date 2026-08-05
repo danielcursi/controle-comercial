@@ -10,7 +10,7 @@ export default function RootLayout() {
                 <Header />
                 <main className={styles.main}>
                     <HeaderTop />
-                    <Outlet />
+                    <Outlet/>
                 </main>
 
             </div>

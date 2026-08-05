@@ -9,6 +9,7 @@ import Material from "./pages/Material/Material";
 import Team from "./pages/Team/Team";
 import Transfer from "./pages/Transfer/Transfer";
 import Users from "./pages/Users/Users";
+import CreateBrand from "./pages/Brand/CreateBrand/CreateBrand";
 
 const router = createBrowserRouter([
     {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
             {
                 path: "/brand",
                 element: <Brand />
+            },
+            {
+                path: "/brand/new",
+                element: <CreateBrand />
             },
             {
                 path: "/center",
