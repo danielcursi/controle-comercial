@@ -1,0 +1,29 @@
+.top{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 2rem;
+}
+
+.brand{
+    background-color: #fff;
+    border-radius: .7rem;
+    display: flex;
+    justify-content: space-between;
+}
+
+.brand ul{
+    width: 100%;
+}
+
+.brand ul li{
+    border-bottom: 1px solid rgba(110, 110, 110, 0.348);
+    display: flex;
+    justify-content: space-between;
+    font-weight: 500;
+    list-style-type: none;
+    padding: 1rem;
+}
+
+.brand ul li:hover{
+    background-color: #cad5e245;
+}

@@ -10,6 +10,7 @@ import Team from "./pages/Team/Team";
 import Transfer from "./pages/Transfer/Transfer";
 import Users from "./pages/Users/Users";
 import CreateBrand from "./pages/Brand/CreateBrand/CreateBrand";
+import CreateTeam from "./pages/Team/CreateTeam/CreateTeam";
 
 const router = createBrowserRouter([
     {
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
             {
                 path: "/team",
                 element: <Team />
+            },
+            {
+                path: "/team/new",
+                element: <CreateTeam />
             },
             {
                 path: "/transfer",

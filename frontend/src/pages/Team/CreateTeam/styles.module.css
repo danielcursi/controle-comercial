@@ -1,0 +1,40 @@
+.newteam{
+    background-color: #fff;
+    border-radius: .8rem;
+    height: 15rem;
+    padding: 1.5rem;
+}
+
+.newteam h1{
+    margin-bottom: 3rem;
+}
+
+.teamForm input{
+    border: 1px solid #bcbcbc;
+    border-radius: .5rem;
+    background-color: transparent;
+    font-style: 1.2rem;
+    margin-right: .7rem;
+    padding: .3rem;
+    height: 1.5rem;
+}
+
+.teamForm input:focus-visible{
+    outline: none;
+}
+
+.teamForm button{
+    background-color: #1C62B3;
+    border: none;
+    border-radius: .7rem;
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    padding: .5rem 1rem;
+}
+
+.teamForm button:hover{
+    background-color: #fff;
+    border: 1px solid #bcbcbc;
+    color: #1C62B3;
+}
